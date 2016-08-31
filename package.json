@@ -1,0 +1,23 @@
+{
+  "name": "trellus",
+  "version": "0.0.1",
+  "description": "visual docs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanBurchard/trellus.git"
+  },
+  "keywords": [
+    "documentation",
+    "api"
+  ],
+  "author": "Evan Burchard <evan.burchard@gmail.com> (http://evanburchard.com/)",
+  "license": "CC-BY-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/EvanBurchard/trellus/issues"
+  },
+  "homepage": "https://github.com/EvanBurchard/trellus#readme"
+}
