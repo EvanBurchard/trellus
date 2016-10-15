@@ -1,46 +1,41 @@
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-    <title>Trellus – a visual documentation standard</title>
+  <title>Trellus Diagrams</title>
 
-  </head>
-  <body>
-    <h1>Trellus: v0.0.1</h1>
-    <h2>Have ideas for making trellus better?</h2><h2>See the project at <a href="https://github.com/evanburchard/trellus">GitHub</a></h2>
-    <h1>Function Bodies With Code Paths</h1>
-    <img src="function_bodies.png" alt="" />
-    <h1>Testing of Code Paths</h1>
-    <img src="testing.png" alt="" />
-    <h1>Labeling</h1>
-    <img src="label.png" alt="" />
-    <h1>Inputs</h1>
-    <img src="inputs.png" alt="" />
-    <h1>Labeled Inputs</h1>
-    <img src="labeled_inputs.png" alt="" />
-    <h1>Functions/Behavior Attached to an Object</h1>
-    <p><em>(their this)</em></p>
-    <img src="functions_with_object.png" alt="" />
-    <h1>State/Attributes Attached to an Object</h1>
-    <p><em>(their this)</em></p>
-    <img src="data_with_object.png" alt="" />
-    <h1>Outputs</h1>
-    <p><em>(return values)</em></p>
-    <img src="outputs.png" alt="" />
-    <h1>Side-Effects</h1>
-    <img src="side-effects.png" alt="" />
-    <h1>Multiple Inputs and Side Effects</h1>
-    <img src="multiple.png" alt="" />
-    <h1>Complex Inputs</h1>
-    <img src="complex_inputs.png" alt="" />
-    <h1>Complex Inputs with Labels</h1>
-    <img src="complex_inputs_label.png" alt="" />
-    <h1>Side Effect that Calls a Function</h1>
-    <img src="side-effect_calls_function.png" alt="" />
-    <h1>Side Effect that Calls Inline Function</h1>
-    <p>(that you want to diagram)</p>
-    <img src="side-effect_calls_inlinefunction.png" alt="" />
-    <h1>Returning the call of another function</h1>
-    <img src="returns_inline_function_call.png" alt="" />
-  </body>
+</head>
+<body onload="setup();" style='margin-bottom:150px'>
+  <script type="text/javascript" charset="utf-8" src='jquery.js'> </script>
+  <script type="text/javascript" charset="utf-8" src='trellus.js'> </script>
+  <div style='width:700px; display:inline-block; vertical-align:top'>
+    <canvas id="canvas" width="600" height="800">No Canvas Support :(</canvas>
+  </div>
+  <div style='width:500px; display:inline-block; vertical-align:top'>
+    <h1>Diagram your function with Trellus.</h1>
+    <!--<p>(or <a href='examples.html'> view examples</a>)</p>-->
+    <p>What is the function name?</p>
+    <input type="text" name="fname" id="fname" placeholder='( )'/>
+    <p>How many lines does it have?</p>
+    <input type="number" name="lines" id="lines" />
+    <p>What type does the function return?</p>
+    <input type="text" name="returnValue" id="returnValue" placeholder='undefined'/>
+    <p>Is the function private? <input type="checkbox" name="priv" id="priv" value="priv"/></p>
+
+    <p>How many code paths are there?</p>
+    <input type="number" name="paths" id="paths" />
+    <p>How many code paths are tested?</p>
+    <input type="number" name="tested" id="tested" />
+    <p>What are the explicit input parameter types to your function?<br /> (separate with commas)</p>
+    <input type="text" name="inputTypes" id="inputTypes" placeholder= 'number, number'/>
+    <p>What is the implicit input (if any)? Do you use "this" inside of the function? If so, what kind of "this" is it?</p>
+    <input type="text" name="implicit" id="implicit" placeholder= 'undefined'/>
+    <p>List any non-local inputs. (separate with commas)</p>
+    <input type="text" name="nonLocal" id="nonLocal"/>
+    <p>Is the function curried? <input type="checkbox" name="curried" id="curried" value="curried"/></p>
+    <p>Describe the side effect(s) if any:</p>
+    <input type="text" name="sideEffectDescription" id="sideEffectDescription"/>
+  </div>
+
+</body>
 </html>
