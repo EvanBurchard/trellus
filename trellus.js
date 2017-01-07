@@ -1,5 +1,18 @@
-function setup(){
-  $('#first').on('click', setAndMake);
+$( document ).ready(function(){
+  $('.section').hide();
+  if(location.hash.length === 0){
+    $('.about-tab').addClass('active');
+    $('.about').show();
+  }else{
+    $('.' + location.hash.slice(1) + '-tab').addClass('active');
+    $('.'+ location.hash.slice(1)).show();
+  }
+
+  $('pre').on('click', exampleDiagram);
+  $('pre span').on('click', exampleDiagram);
+
+  $('.tab').on('click', hideTabs);
+
   $('#make-function').on('click', setAndMake);
   $('#priv').on('click', setAndMake);
   $('#paths').on('change', setAndMake);
@@ -25,9 +38,141 @@ function setup(){
   context.font = "24px serif";
   context.fillStyle = 'white';
   setAndMake();
+});
+
+function exampleDiagram(element){
+  var target = $(element.target).closest("pre");
+  clear();
+  if ($(target).hasClass('first')){
+    firstDiagram();
+  } else if ($(target).hasClass('second')){
+    secondDiagram();
+  }
+  else if ($(target).hasClass('third')){
+    thirdDiagram();
+  }
+  else if ($(target).hasClass('fourth')){
+   fourthDiagram();
+  }
+  else if ($(target).hasClass('fifth')){
+   fifthDiagram();
+  }
+  else if ($(target).hasClass('sixth')){
+   sixthDiagram();
+  }
+  else if ($(target).hasClass('seventh')){
+   seventhDiagram();
+  }
+  else if ($(target).hasClass('eigth')){
+   eigthDiagram();
+  }
+  else if ($(target).hasClass('ninth')){
+   ninthDiagram();
+  }
+  else if ($(target).hasClass('tenth')){
+   tenthDiagram();
+  }
+  setAndMake();
 };
+function clear(){
+  $("#priv").prop("checked", false);
+  $('#paths').val('0');
+  $('#tested').val('0');
+  $('#fname').val('');
+  $('#lines').val(0);
+  $('#inputTypes').val('');
+  $('#returnValue').val('');
+  $('#nonLocal').val('');
+  $('#sideEffectDescription').val('');
+  $("#curried").prop("checked", false);
+  $('#implicit').val('');
+};
+function firstDiagram(){
+  $('#paths').val('1');
+  $('#fname').val('add');
+  $('#lines').val(3);
+  $('#inputTypes').val('                  Number,  Number');
+  $('#returnValue').val('   Number');
+};
+
+function secondDiagram(){
+  $('#paths').val('1');
+  $('#fname').val('log');
+  $('#lines').val(3);
+  $('#inputTypes').val('                  String');
+  $('#returnValue').val('  undefined');
+  $('#nonLocal').val('console');
+  $('#sideEffectDescription').val('                 prints the input string');
+};
+
+function thirdDiagram(){
+  $('#paths').val('2');
+  $('#fname').val('canDrive');
+  $('#lines').val(7);
+  $('#inputTypes').val('                  Number');
+  $('#returnValue').val('    Boolean');
+};
+function fourthDiagram(){
+  $('#paths').val('2');
+  $('#tested').val('1');
+  $('#fname').val('canDrive');
+  $('#lines').val(7);
+  $('#inputTypes').val('                  Number');
+  $('#returnValue').val('    Boolean');
+};
+function fifthDiagram(){
+  $('#paths').val('2');
+  $('#tested').val('2');
+  $('#fname').val('canDrive');
+  $('#lines').val(7);
+  $('#inputTypes').val('                  Number');
+  $('#returnValue').val('    Boolean');
+};
+function sixthDiagram(){
+  $('#paths').val('1');
+  $('#fname').val('outer');
+  $('#lines').val(5);
+  $('#returnValue').val('    Function');
+};
+function seventhDiagram(){
+  $("#priv").prop("checked", true);
+  $('#paths').val('1');
+  $('#fname').val('inner');
+  $('#lines').val(3);
+  $('#returnValue').val('   Number');
+};
+function eigthDiagram(){
+  $('#paths').val('1');
+  $('#fname').val('name');
+  $('#lines').val(1);
+  $('#returnValue').val('    String');
+  $('#implicit').val('container');
+};
+function ninthDiagram(){
+  $('#paths').val('1');
+  $('#fname').val('name');
+  $('#lines').val(1);
+  $('#returnValue').val('    String');
+  $('#implicit').val('package');
+};
+function tenthDiagram(){
+  $('#paths').val('1');
+  $('#fname').val('curriedAdd');
+  $("#curried").prop("checked", true);
+  $('#lines').val(5);
+  $('#inputTypes').val('                  Number,  Number');
+  $('#returnValue').val('   Number');
+};
+
+function hideTabs(el){
+  $('.section').hide();
+  $('.'+el.target.toString().match(/#(.*)/)[1]).show();
+
+  $('.tab').removeClass('active');
+  $(this).addClass('active');
+};
+
 function viewPicture(){
-  //var image = canvas.toDataURL("image/png");
   var image = canvas.toDataURL("image/png");
   window.location.href = image;
 }

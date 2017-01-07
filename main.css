@@ -1,0 +1,17 @@
+.active a{
+  text-decoration:none;
+}
+.active{
+  text-decoration:none;
+}
+.tab a{
+  font-size: 2em;
+  margin-right: .6em;
+
+}
+pre{
+  cursor: pointer;
+}
+.section{
+  display:none;
+}

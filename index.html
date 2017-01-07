@@ -1,40 +1,161 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
+  <link rel="stylesheet" type="text/css" href="theme.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
   <title>Trellus Diagrams</title>
 
 </head>
 <body onload="setup();" style='margin-bottom:150px'>
   <script type="text/javascript" charset="utf-8" src='jquery.js'> </script>
   <script type="text/javascript" charset="utf-8" src='trellus.js'> </script>
+  <div class='nav'>
+    <span class='tab about-tab'><a href="#about">About</a></span>
+    <span class='tab examples-tab'><a href="#examples">Examples</a></span>
+    <span class='tab diagrams-tab'><a href="#diagrams">Diagram</a></span>
+  </div>
+  <hr>
   <div style='width:700px; display:inline-block; vertical-align:top'>
     <canvas id="canvas" width="600" height="800">No Canvas Support :(</canvas>
   </div>
   <div style='width:500px; display:inline-block; vertical-align:top'>
-    <h1>Diagram your function with Trellus.</h1>
-    <!--<p>(or <a href='examples.html'> view examples</a>)</p>-->
-    <p>What is the function name?</p>
-    <input type="text" name="fname" id="fname" placeholder='( )'/>
-    <p>How many lines does it have?</p>
-    <input type="number" name="lines" id="lines" />
-    <p>What type does the function return?</p>
-    <input type="text" name="returnValue" id="returnValue" placeholder='undefined'/>
-    <p>Is the function private? <input type="checkbox" name="priv" id="priv" value="priv"/></p>
-    <p>How many code paths are there?</p>
-    <input type="number" name="paths" id="paths" value='1'/>
-    <p>How many code paths are tested?</p>
-    <input type="number" name="tested" id="tested" />
-    <p>What are the explicit input parameter types to your function?<br /> (separate with commas)</p>
-    <input type="text" name="inputTypes" id="inputTypes" placeholder= 'number, number'/>
-    <p>What is the implicit input (if any)? Do you use "this" inside of the function? If so, what kind of "this" is it?</p>
-    <input type="text" name="implicit" id="implicit" placeholder= 'undefined'/>
-    <p>List any non-local inputs. (separate with commas)</p>
-    <input type="text" name="nonLocal" id="nonLocal"/>
-    <p>Is the function curried? <input type="checkbox" name="curried" id="curried" value="curried"/></p>
-    <p>Describe the side effect(s) if any:</p>
-    <input type="text" name="sideEffectDescription" id="sideEffectDescription"/>
+    <div class='about section'>
+      <h1>Trellus</h1>
+      <h3><a href='https://github.com/evanburchard/ever'>EVER</a> Version 1.1.0</h3>
+      <p>Trellus is a documentation tool to illustrate functions in JavaScript.</p>
+      <p>The complexity of the diagrams increases as functions get more complex.</p>
+      <p>Because this tool was developed with JavaScript in mind, there is an assumption that these diagrams are created with both a function declaration <em>and</em> a particular way of calling that function.</p> <p>In JavaScript, context matters to non-local inputs (aka. "free variables") and because you can use bind, call and this to manipulate the implicit parameter, a function definition alone is not necessarily enough to generate a diagram. You may need a function call as well.</p>
+      <p>Trellus was originally created by <a href='http://evanburchard.com'>Evan Burchard</a> to demonstrate functions in the book, "Refactoring JavaScript," and is available for free at <a href='http://refactoringjs.com'>refactoringjs.com</a>.</p>
+      <p>The project is available for contributions on <a href='https://github.com/evanburchard/trellus'>GitHub</a>. If you have any ideas for extensions or have trouble making Trell.us work for one of your functions, feel free to submit an issue there.</p>
+      <p>If you're not sure what to do next, try exploring the <a href="#examples" class='tab examples-tab examples-link'>examples</a>.</p>
+    </div>
+    <div class='examples section'>
+      <h1>Examples</h1>
+      <a class='code first'>
+        <pre class='first'><code data-language='javascript' class='first'>
+function add(first, second){
+  return first + second;
+};
+        </code></pre>
+      </a>
+      <pre class='second'><code data-language='javascript'>
+function log(someString){
+  console.log(someString);
+};
+      </code></pre>
+      <pre class='third'><code data-language='javascript'>
+function canDrive(age){
+  if(age > 16){
+    return true;
+  }else{
+    return false;
+  }
+};
+      </code></pre>
+      <pre class='fourth'><code data-language='javascript'>
+function canDrive(age){
+  ...
+};
+assert(canDrive(18) === true);
+      </code></pre>
+      <pre class='fifth'><code data-language='javascript'>
+function canDrive(age){
+  ...
+};
+assert(canDrive(18) === true);
+assert(canDrive(7) === false);
+      </code></pre>
+      <pre class='sixth'><code data-language='javascript'>
+// from outer perspective
+function outer(){
+  return function inner(){
+    return 5;
+  };
+};
+      </code></pre>
+      <pre class='seventh'><code data-language='javascript'>
+// from inner perspective
+function outer(){
+  return function inner(){
+    return 5;
+  };
+};
+      </code></pre>
+      <pre class='eigth'><code data-language='javascript'>
+container = {
+  type: 'bag',
+  name(){ return this.type }
+};
+// diagram the expected "this"
+container.name();
+      </code></pre>
+      <pre class='ninth'><code data-language='javascript'>
+container = {
+  type: 'bag',
+  name(){ return this.type }
+};
+package = {
+  type: 'box'
+};
+
+// these return box because the implicit param
+// is 'package', not 'container'
+container.name.call(package);
+container.name.apply(package);
+container.name.bind(package).call();
+
+      </code></pre>
+      <pre class='tenth'><code data-language='javascript'>
+
+function curriedAdd(first){
+  return function(paramToFill){
+    return first + paramToFill;
+  };
+};
+
+// This function accepts one input
+// at a time (it is curried).
+curriedAdd(3)(4);
+
+// This is actually two function calls, but the
+// currying pattern is very common.
+
+// Assuming we apply both arguments at once, instead
+// of diagramming both functions, Trellus
+// uses a shorthand (small circle) at the junction
+// between the input lines (at the top)
+// and the large circle.
+
+      </code></pre>
+    </div>
+    <div class='diagrams section'>
+      <h1>Diagram your function with Trellus.</h1>
+      <!--<p>(or <a href='examples.html'> view examples</a>)</p>-->
+      <p>What is the function's name?</p>
+      <input type="text" name="fname" id="fname" placeholder='( )'/>
+      <p>How many lines does it have?</p>
+      <input type="number" name="lines" id="lines" />
+      <p>What type does the function return?</p>
+      <input type="text" name="returnValue" id="returnValue" placeholder='undefined'/>
+      <p>Is the function private? <input type="checkbox" name="priv" id="priv" value="priv"/></p>
+      <p>How many code paths are there?</p>
+      <input type="number" name="paths" id="paths" value='1'/>
+      <p>How many code paths are tested?</p>
+      <input type="number" name="tested" id="tested" />
+      <p>What are the explicit input parameter types to your function?<br /> (separate with commas)</p>
+      <input type="text" name="inputTypes" id="inputTypes" placeholder= 'number, number'/>
+      <p>What is the implicit input (if any)? Do you use "this" inside of the function? If so, what kind of "this" is it?</p>
+      <input type="text" name="implicit" id="implicit" placeholder= 'undefined'/>
+      <p>List any non-local inputs. (separate with commas)</p>
+      <input type="text" name="nonLocal" id="nonLocal"/>
+      <p>Is the function curried? <input type="checkbox" name="curried" id="curried" value="curried"/></p>
+      <p>Describe the side effect(s) if any:</p>
+      <input type="text" name="sideEffectDescription" id="sideEffectDescription"/>
+    </div>
   </div>
 
+  <script src="rainbow.js"></script>
+  <script src="generic.js"></script>
+  <script src="python.js"></script>
 </body>
 </html>
