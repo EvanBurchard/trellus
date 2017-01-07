@@ -14,7 +14,7 @@
   <div class='nav'>
     <span class='tab about-tab'><a href="#about">About</a></span>
     <span class='tab examples-tab'><a href="#examples">Examples</a></span>
-    <span class='tab diagrams-tab'><a href="#diagrams">Diagram</a></span>
+    <span class='tab diagrams-tab'><a href="#diagrams">Make Your Own</a></span>
     <hr>
   </div>
   <div class='diagram-section'>
@@ -29,7 +29,21 @@
       <p>Because this tool was developed with JavaScript in mind, there is an assumption that these diagrams are created with both a function declaration <em>and</em> a particular way of calling that function.</p> <p>In JavaScript, context matters to non-local inputs (aka. "free variables") and because you can use bind, call and this to manipulate the implicit parameter, a function definition alone is not necessarily enough to generate a diagram. You may need a function call as well.</p>
       <p>Trellus was originally created by <a href='http://evanburchard.com'>Evan Burchard</a> to demonstrate functions in the book, "Refactoring JavaScript," and is available for free at <a href='http://refactoringjs.com'>refactoringjs.com</a>.</p>
       <p>The project is available for contributions on <a href='https://github.com/evanburchard/trellus'>GitHub</a>. If you have any ideas for extensions or have trouble making Trell.us work for one of your functions, feel free to submit an issue there.</p>
-      <p><strong>If you're not sure what to do next, try exploring the <a href="#examples" class='tab examples-tab examples-link'>examples</a>.</strong></p>
+      <p>The overall layout deserves a bit more explanation:
+        <ul>
+          <li>The circle gets divided according to how many code paths there are, and they are grayed out if they are tested.</li>
+          <li>The function name and lines of code are on the top left.</li>
+          <li>On the top, the explicit inputs are displayed.</li>
+          <li>Any non-local inputs ("free variables") are in the dashed box on the right.</li>
+          <li>The implicit input (that which the function body ends up recognizing as "this" is shown on the left.</li>
+          <li>The oval at the bottom holds a return type.</li>
+          <li>Underneath the diamond on the bottom, text describes what side effects occur through this function.</li>
+          <li>If a function is private, the circle gets a gray ring around it.</li>
+          <li>If a function is curried, it's explicit inputs (the lines on top) are joined to a gray circle at the top of the big circle.</li>
+        </ul>
+      </p>
+      <p><strong>Anyways, this will probably be easier to understand after working a bit with the <a href="#examples" class='tab examples-tab examples-link'>examples</a>.</strong></p>
+
     </div>
     <div class='examples section'>
       <h1 class='hint'>(psst... click these)</h1>
