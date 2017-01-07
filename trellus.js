@@ -8,6 +8,7 @@ $( document ).ready(function(){
     $('.'+ location.hash.slice(1)).show();
   }
 
+
   $('pre').on('click', exampleDiagram);
   $('pre span').on('click', exampleDiagram);
 
@@ -170,6 +171,10 @@ function hideTabs(el){
 
   $('.tab').removeClass('active');
   $(this).addClass('active');
+
+  if($(this).hasClass('examples-tab')){
+    $('.examples-tab').addClass('active');
+  };
 };
 
 function viewPicture(){

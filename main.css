@@ -1,3 +1,9 @@
+body{
+  margin-bottom:150px;
+}
+.nav{
+  width: 100%;
+}
 .active a{
   text-decoration:none;
 }
@@ -14,4 +20,15 @@ pre{
 }
 .section{
   display:none;
+}
+.diagram-section{
+  width:600px;
+  display:inline-block;
+  vertical-align:top;
+  margin-right:38px;
+}
+.content-section{
+  width:43%;
+  display:inline-block;
+  vertical-align:top;
 }
